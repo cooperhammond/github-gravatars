@@ -1,6 +1,6 @@
 import random
 from sys import stdout
-import Image
+from PIL import Image
 
 def generate(r, size):
     # r must be an odd number
@@ -9,7 +9,7 @@ def generate(r, size):
     colors = [(170, 126, 223), (137, 225, 138), (210, 107, 74)]
     color = colors[random.randrange(0, len(colors))]
     bg = (240, 240, 240)
-        
+
     lines = []
     for i in range(0, r):
         line = []
@@ -21,15 +21,15 @@ def generate(r, size):
         for i in reversed(line[:(r / 2)]):
             line.append(i)
         lines.append(line)
-        
+
     pixels = []
-    
+
     for n_ in range(0, scale / 2):
         row = []
         for n_ in range(0, s):
            row.append(bg)
         pixels.append(row)
-    
+
     for i in lines:
         for n_ in range(0, scale):
             row = []
@@ -45,18 +45,18 @@ def generate(r, size):
             for n_ in range(0, scale / 2):
                 row.append(bg)
             pixels.append(row)
-    
+
     for n_ in range(0, scale / 2):
         row = []
         for n_ in range(0, s):
            row.append(bg)
         pixels.append(row)
-    
+
     pixels = sum(pixels, [])
 
     im = Image.new("RGB", (s, s))
     im.putdata(pixels)
     im.save('gravatar.png')
-    
+
 if __name__ == "__main__":
     generate(5, 420)
